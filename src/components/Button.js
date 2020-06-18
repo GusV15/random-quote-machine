@@ -1,9 +1,9 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTwitter, faTumblr } from '@fortawesome/free-brands-svg-icons'
-
-export const Button = ({ handleClick, color }) => {
+import { faTwitter, faTumblr } from '@fortawesome/free-brands-svg-icons';
+ 
+const Button = ({ handleClick, color, quote }) => {
     const ButtonsPageStyled = styled.div`
     .buttons {
         display: flex;
@@ -27,6 +27,11 @@ export const Button = ({ handleClick, color }) => {
           opacity: 0.8;
       }
       
+      a {
+        color: white;
+        text-decoration: none;
+      }
+
       .button-icon {
         width: 40px;
         height: 40px;
@@ -44,19 +49,22 @@ export const Button = ({ handleClick, color }) => {
       }
 
       @-webkit-keyframes delay {
-          from{background: ${color.previousColor};}
-          to{background: ${color.currentColor};}
+        from{background: ${color.previousColor};}
+        to{background: ${color.currentColor};}
       }
     `
+    const linkTumblr = `https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=${encodeURIComponent(quote.author)}&content=${encodeURIComponent(quote.text)}&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button`
+    const linkTwitter = `https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text="${encodeURIComponent(quote.text)}" -${encodeURIComponent(quote.author)}`
+    
     return (
         <ButtonsPageStyled>
             <div className="buttons">
                 <div className="buttons-icon">
                     <button className="button button-icon">
-                        <FontAwesomeIcon className="icon" icon={faTwitter} />
+                        <a href={linkTwitter} target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className="icon" icon={faTwitter} /></a>
                     </button>
                     <button className="button button-icon">
-                        <FontAwesomeIcon className="icon" icon={faTumblr} />
+                        <a href={linkTumblr} target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className="icon" icon={faTumblr} /></a>
                     </button>
                 </div>
                 <button className="button button-quote" onClick={handleClick}>New quote</button>
@@ -64,3 +72,5 @@ export const Button = ({ handleClick, color }) => {
         </ButtonsPageStyled>
     )
 };
+
+export default Button;

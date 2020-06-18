@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Quote from './components/Quote';
-import { Button } from './components/Button';
+import Button from './components/Button';
 import styled from 'styled-components'
 
 function App() {
@@ -74,7 +74,7 @@ function App() {
       <div className="app">
         <div className="container">
           <Quote quote={quote} color={color} />
-          <Button handleClick={handleClick} color={color} />
+          <Button handleClick={handleClick} color={color} quote={quote}/>
         </div>
       </div>
     </MainStyled>
